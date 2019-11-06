@@ -17,4 +17,4 @@ else
 fi
 
 echo "[info] Starting Minecraft bedrock process..."
-/config/minecraft/minecraft-server
+cd "/config/minecraft" && ./bedrock_server

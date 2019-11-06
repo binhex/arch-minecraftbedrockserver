@@ -13,7 +13,8 @@ Alpha release of Minecraft Bedrock Edition for Linux.
 **Usage**
 ```
 docker run -d \
-    -p 25565:25565 \ 
+    -p 19132:19132 \
+    -p 48897:48897 \
     --name=<container name> \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
@@ -28,7 +29,8 @@ Please replace all user variables in the above command defined by <> with the co
 **Example**
 ```
 docker run -d \
-    -p 25565:25565 \ 
+    -p 19132:19132 \
+    -p 48897:48897 \
     --name=minecraftbedrockserver \
     -v /apps/docker/minecraftbedrockserver:/config \
     -v /etc/localtime:/etc/localtime:ro \
