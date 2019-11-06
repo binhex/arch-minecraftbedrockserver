@@ -42,7 +42,7 @@ source aur.sh
 # use awk to match start and end of tags
 # grep to perl regex match download url
 # grep to stop at end double quotes
-minecraft_bedrock_url=$(curl -s https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net[^"]+' | grep -Po '[^"]+$')
+minecraft_bedrock_url=$(curl -s https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
 
 # download compiled minecraft bedrock server
 curly.sh -rc 6 -rw 10 -of "/tmp/minecraftbedrockserver.zip" -url "${minecraft_bedrock_url}"

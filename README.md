@@ -1,6 +1,6 @@
 **Application**
 
-[Minecraft](https://www.minecraft.net/)
+[Minecraft Bedrock Edition](https://www.minecraft.net/en-us/download/server/bedrock)
 
 **Description**
 
@@ -8,7 +8,7 @@ Minecraft is a sandbox video game created by Swedish game developer Markus Perss
 
 **Build notes**
 
-Latest stable Minecraft release from Arch Linux AUR.
+Alpha release of Minecraft Bedrock Edition for Linux.
 
 **Usage**
 ```
@@ -17,14 +17,10 @@ docker run -d \
     --name=<container name> \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
-    -e MAX_BACKUPS=<max number of minecraft backups> \
-    -e JAVA_INITIAL_HEAP_SIZE=<java initial heap size in megabytes> \
-    -e JAVA_MAX_HEAP_SIZE=<java max heap size in megabytes> \
-    -e JAVA_MAX_THREADS=<java max number of threads> \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-    binhex/arch-minecraft
+    binhex/arch-minecraftbedrockserver
 ```
 
 Please replace all user variables in the above command defined by <> with the correct values.
@@ -33,28 +29,16 @@ Please replace all user variables in the above command defined by <> with the co
 ```
 docker run -d \
     -p 25565:25565 \ 
-    --name=minecraft \
-    -v /apps/docker/minecraft:/config \
+    --name=minecraftbedrockserver \
+    -v /apps/docker/minecraftbedrockserver:/config \
     -v /etc/localtime:/etc/localtime:ro \
-    -e MAX_BACKUPS=10 \
-    -e JAVA_INITIAL_HEAP_SIZE=512M \
-    -e JAVA_MAX_HEAP_SIZE=1024M \
-    -e JAVA_MAX_THREADS=1 \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-    binhex/arch-minecraft
+    binhex/arch-minecraftbedrockserver
 ```
 
 **Notes**
-
-JAVA_INITIAL_HEAP_SIZE value and JAVA_MAX_HEAP_SIZE values must be a multiple of 1024 and greater than 2MB.
-
-If you want to connect to the minecraft server console then issue the following command, use CTRL+a and then press 'd' to disconnect from the session, leaving it running.
-
-```
-docker exec -u nobody -t <name of container> /usr/bin/minecraftd console
-```
 
 User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as:-
 
