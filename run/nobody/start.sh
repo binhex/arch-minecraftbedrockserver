@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# if minecraft folder doesnt exist then copy default to host config volume (soft linked)
+# if minecraft folder doesnt exist then copy default to host config volume
 if [ ! -d "/config/minecraft" ]; then
 
-	echo "[info] Minecraft folder doesnt exist, copying default to /config/minecraft/..."
+	echo "[info] Minecraft folder doesnt exist, copying default to '/config/minecraft/'..."
 
 	mkdir -p /config/minecraft
 	if [[ -d "/srv/minecraft" ]]; then
@@ -12,7 +12,8 @@ if [ ! -d "/config/minecraft" ]; then
 
 else
 
-	echo "[info] Minecraft folder already exists, skipping copy"
+	echo "[info] Minecraft folder '/config/minecraft' already exists, rsyncing newer files..."
+	rsync -ur --exclude 'worlds' --exclude 'server.properties' --exclude '*.json' /srv/minecraft/ /config/minecraft
 
 fi
 
