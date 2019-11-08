@@ -13,7 +13,7 @@ if [ ! -d "/config/minecraft" ]; then
 else
 
 	echo "[info] Minecraft folder '/config/minecraft' already exists, rsyncing newer files..."
-	rsync -ur --exclude 'worlds' --exclude '/server.properties' --exclude '/*.json' /srv/minecraft/ /config/minecraft
+	rsync -url --exclude 'worlds' --exclude '/server.properties' --exclude '/*.json' /srv/minecraft/ /config/minecraft
 
 fi
 
