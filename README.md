@@ -13,8 +13,12 @@ Alpha release of Minecraft Bedrock Edition for Linux.
 **Usage**
 ```
 docker run -d \
-    --net="host" \
+    --net="bridge" \
     --name=<container name> \
+    -p <host port>:19132/tcp \
+    -p <host port>:19132/udp \
+    -p <host port>:19133/tcp \
+    -p <host port>:19133/udp \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e UMASK=<umask for created files> \
@@ -28,8 +32,12 @@ Please replace all user variables in the above command defined by <> with the co
 **Example**
 ```
 docker run -d \
-    --net="host" \
+    --net="bridge" \
     --name=minecraftbedrockserver \
+    -p 19132:19132/tcp \
+    -p 19132:19132/udp \
+    -p 19132:19133/tcp \
+    -p 19132:19133/udp \
     -v /apps/docker/minecraftbedrockserver:/config \
     -v /etc/localtime:/etc/localtime:ro \
     -e UMASK=000 \

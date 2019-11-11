@@ -26,6 +26,14 @@ RUN chmod +x /root/*.sh && \
 # map /config to host defined config path (used to store configuration from app)
 VOLUME /config
 
+# expose ipv4 port for minecraft
+EXPOSE 19132/tcp
+EXPOSE 19132/udp
+
+# expose ipv6 port for minecraft
+EXPOSE 19133/tcp
+EXPOSE 19133/udp
+
 # set permissions
 #################
 
