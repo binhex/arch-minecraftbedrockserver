@@ -17,13 +17,13 @@ else
 
 fi
 
-echo "[info] Starting Minecraft Bedrock process in tmux session 'minecraft'..."
-echo "[info] To attach to the tmux session run:-"
-echo "[info] docker exec -u nobody -it <container name> tmux a -t minecraft"
-echo "[info] To detach from the tmux session press:-"
-echo "[info] CTRL+b and then release keys and press d"
+echo "[info] Starting Minecraft Bedrock process in screen session 'minecraft'..."
+echo "[info] To attach to the screen session run:-"
+echo "[info] docker exec -u nobody -it <container name> screen -r minecraft"
+echo "[info] To detach from the screen session press:-"
+echo "[info] CTRL+a and then release keys and press d"
 
-# run tmux attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
-/usr/bin/script /home/nobody/typescript --command "/usr/bin/tmux new-session -d -s minecraft -n minecraft 'cd /config/minecraft && ./bedrock_server'"
-echo "[info] Minecraft bedrock process is running"
+# run screen attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
+screen -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server"
+echo "[info] Minecraft Bedrock process is running"
 cat
