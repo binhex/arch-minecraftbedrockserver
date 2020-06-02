@@ -28,7 +28,10 @@ echo "[info] docker exec -u nobody -it <container name> screen -r minecraft"
 echo "[info] To detach from the screen session press:-"
 echo "[info] CTRL+a and then release keys and press d"
 
+# create logs sub folder to store screen output from console
+mkdir -p /config/minecraft/logs
+
 # run screen attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
-screen -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server"
+screen -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server" -L -Logfile /config/minecraft/logs/screen.log
 echo "[info] Minecraft Bedrock process is running"
 cat
