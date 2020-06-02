@@ -32,6 +32,6 @@ echo "[info] CTRL+a and then release keys and press d"
 mkdir -p /config/minecraft/logs
 
 # run screen attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
-screen -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server" -L -Logfile /config/minecraft/logs/screen.log
+screen -L -Logfile '/config/minecraft/logs/screen.log' -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server"
 echo "[info] Minecraft Bedrock process is running"
 cat
