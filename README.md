@@ -21,6 +21,8 @@ docker run -d \
     -p <host port>:19133/udp \
     -v <path for config files>:/config \
     -v /etc/localtime:/etc/localtime:ro \
+    -e CREATE_BACKUP_HOURS=<frequency of world backups in hours> \
+    -e PURGE_BACKUP_DAYS=<specify oldest world backups to keep in days> \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
@@ -40,6 +42,8 @@ docker run -d \
     -p 19132:19133/udp \
     -v /apps/docker/minecraftbedrockserver:/config \
     -v /etc/localtime:/etc/localtime:ro \
+    -e CREATE_BACKUP_HOURS=12 \
+    -e PURGE_BACKUP_DAYS=14 \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
@@ -47,6 +51,8 @@ docker run -d \
 ```
 
 **Notes**
+
+If you do **NOT** want world backups and/or purging of backups then set the value to '0' for env vars 'CREATE_BACKUP_HOURS' and/or 'PURGE_BACKUP_DAYS'.
 
 User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as:-
 
