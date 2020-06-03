@@ -124,5 +124,32 @@ rm /tmp/permissions_heredoc
 # env vars
 ####
 
+cat <<'EOF' > /tmp/envvars_heredoc
+
+export PURGE_BACKUP_DAYS=$(echo "${CREATE_BACKUP_HOURS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${CREATE_BACKUP_HOURS}" ]]; then
+	echo "[info] CREATE_BACKUP_HOURS defined as '${CREATE_BACKUP_HOURS}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] CREATE_BACKUP_HOURS not defined,(via -e CREATE_BACKUP_HOURS), defaulting to '12'" | ts '%Y-%m-%d %H:%M:%.S'
+	export CREATE_BACKUP_HOURS="12"
+fi
+
+export PURGE_BACKUP_DAYS=$(echo "${PURGE_BACKUP_DAYS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${PURGE_BACKUP_DAYS}" ]]; then
+	echo "[info] PURGE_BACKUP_DAYS defined as '${PURGE_BACKUP_DAYS}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] PURGE_BACKUP_DAYS not defined,(via -e PURGE_BACKUP_DAYS), defaulting to '14'" | ts '%Y-%m-%d %H:%M:%.S'
+	export PURGE_BACKUP_DAYS="14"
+fi
+
+EOF
+
+# replace env vars placeholder string with contents of file (here doc)
+sed -i '/# ENVVARS_PLACEHOLDER/{
+    s/# ENVVARS_PLACEHOLDER//g
+    r /tmp/envvars_heredoc
+}' /usr/local/bin/init.sh
+rm /tmp/envvars_heredoc
+
 # cleanup
 cleanup.sh
