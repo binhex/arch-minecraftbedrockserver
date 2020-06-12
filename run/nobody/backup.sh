@@ -4,6 +4,9 @@
 
 if [[ "${CREATE_BACKUP_HOURS}" -gt 0 ]]; then
 
+	# create backup sub folder to store backups of worlds
+	mkdir -p /config/minecraft/backups
+
 	while true; do
 
 		retry_count=10
