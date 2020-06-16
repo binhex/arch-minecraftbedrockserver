@@ -30,8 +30,14 @@ docker run -d \
     -e PGID=<gid for user> \
     binhex/arch-minecraftbedrockserver
 ```
-
+&nbsp;
 Please replace all user variables in the above command defined by <> with the correct values.
+
+**Access Minecraft Server console**
+
+Requires env var 'ENABLE_WEBUI_CONSOLE' set to 'yes'
+
+`http://<host ip>:8222`
 
 **Example**
 ```
