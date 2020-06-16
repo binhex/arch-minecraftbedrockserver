@@ -51,6 +51,16 @@ aur_packages=""
 # call aur install script (arch user repo)
 source aur.sh
 
+# github packages
+####
+
+# download gotty which gives us minecraft console in web ui
+if [[ "${OS_ARCH}" == "x86-64" ]]; then
+	github.sh -df github-download.zip -dp /tmp -ep /tmp/extracted -ip /usr/bin -go yudai -rt binary -gr gotty -da gotty_linux_amd64.tar.gz
+elif [[ "${OS_ARCH}" == "aarch64" ]]; then
+	github.sh -df github-download.zip -dp /tmp -ep /tmp/extracted -ip /usr/bin -go yudai -rt binary -gr gotty -da gotty_linux_arm.tar.gz
+fi
+
 # custom
 ####
 
@@ -58,10 +68,10 @@ source aur.sh
 # use awk to match start and end of tags
 # grep to perl regex match download url
 # grep to stop at end double quotes
-minecraft_bedrock_url=$(curl -s https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
+minecraft_bedrock_url=$(curly.sh -url https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
 
 # download compiled minecraft bedrock server
-curly.sh -rc 6 -rw 10 -of "/tmp/minecraftbedrockserver.zip" -url "${minecraft_bedrock_url}"
+curly.sh -of "/tmp/minecraftbedrockserver.zip" -url "${minecraft_bedrock_url}"
 
 # unzip minecraft bedrock server
 mkdir -p "/srv/minecraft" && unzip "/tmp/minecraftbedrockserver.zip" -d "/srv/minecraft"
@@ -140,6 +150,22 @@ if [[ ! -z "${PURGE_BACKUP_DAYS}" ]]; then
 else
 	echo "[info] PURGE_BACKUP_DAYS not defined,(via -e PURGE_BACKUP_DAYS), defaulting to '14'" | ts '%Y-%m-%d %H:%M:%.S'
 	export PURGE_BACKUP_DAYS="14"
+fi
+
+export ENABLE_WEBUI_CONSOLE=$(echo "${ENABLE_WEBUI_CONSOLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${ENABLE_WEBUI_CONSOLE}" ]]; then
+	echo "[info] ENABLE_WEBUI_CONSOLE defined as '${ENABLE_WEBUI_CONSOLE}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] ENABLE_WEBUI_CONSOLE not defined,(via -e ENABLE_WEBUI_CONSOLE), defaulting to 'yes'" | ts '%Y-%m-%d %H:%M:%.S'
+	export ENABLE_WEBUI_CONSOLE="yes"
+fi
+
+export WEBUI_CONSOLE_TITLE=$(echo "${WEBUI_CONSOLE_TITLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${WEBUI_CONSOLE_TITLE}" ]]; then
+	echo "[info] WEBUI_CONSOLE_TITLE defined as '${WEBUI_CONSOLE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] WEBUI_CONSOLE_TITLE not defined,(via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
+	export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
 fi
 
 EOF
