@@ -25,7 +25,10 @@ docker run -d \
     -e CREATE_BACKUP_HOURS=<frequency of world backups in hours> \
     -e PURGE_BACKUP_DAYS=<specify oldest world backups to keep in days> \
     -e ENABLE_WEBUI_CONSOLE=<yes|no> \
+    -e ENABLE_WEBUI_AUTH=<yes|no> \
     -e WEBUI_CONSOLE_TITLE=<specify webui console title> \
+    -e WEBUI_USER=<specify webui username> \
+    -e WEBUI_PASS=<specify webui password \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
@@ -55,7 +58,10 @@ docker run -d \
     -e CREATE_BACKUP_HOURS=12 \
     -e PURGE_BACKUP_DAYS=14 \
     -e ENABLE_WEBUI_CONSOLE=yes \
-    -e WEBUI_CONSOLE_TITLE=Minecraft Bedrock \
+    -e ENABLE_WEBUI_AUTH=yes \
+    -e WEBUI_CONSOLE_TITLE=Minecraft Server \
+    -e WEBUI_USER=admin \
+    -e WEBUI_PASS=minecraft \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \

@@ -160,12 +160,52 @@ else
 	export ENABLE_WEBUI_CONSOLE="yes"
 fi
 
-export WEBUI_CONSOLE_TITLE=$(echo "${WEBUI_CONSOLE_TITLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-if [[ ! -z "${WEBUI_CONSOLE_TITLE}" ]]; then
-	echo "[info] WEBUI_CONSOLE_TITLE defined as '${WEBUI_CONSOLE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
-else
-	echo "[info] WEBUI_CONSOLE_TITLE not defined,(via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
-	export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
+if [[ "${ENABLE_WEBUI_CONSOLE}" == "yes" ]]; then
+
+	export WEBUI_CONSOLE_TITLE=$(echo "${WEBUI_CONSOLE_TITLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+	if [[ ! -z "${WEBUI_CONSOLE_TITLE}" ]]; then
+		echo "[info] WEBUI_CONSOLE_TITLE defined as '${WEBUI_CONSOLE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
+	else
+		echo "[info] WEBUI_CONSOLE_TITLE not defined,(via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
+		export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
+	fi
+
+	export ENABLE_WEBUI_AUTH=$(echo "${ENABLE_WEBUI_AUTH}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+	if [[ ! -z "${ENABLE_WEBUI_AUTH}" ]]; then
+		echo "[info] ENABLE_WEBUI_AUTH defined as '${ENABLE_WEBUI_AUTH}'" | ts '%Y-%m-%d %H:%M:%.S'
+	else
+		echo "[warn] ENABLE_WEBUI_AUTH not defined (via -e ENABLE_WEBUI_AUTH), defaulting to 'yes'" | ts '%Y-%m-%d %H:%M:%.S'
+		export ENABLE_WEBUI_AUTH="yes"
+	fi
+
+	if [[ $ENABLE_WEBUI_AUTH == "yes" ]]; then
+		export WEBUI_USER=$(echo "${WEBUI_USER}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+		if [[ ! -z "${WEBUI_USER}" ]]; then
+			echo "[info] WEBUI_USER defined as '${WEBUI_USER}'" | ts '%Y-%m-%d %H:%M:%.S'
+		else
+			echo "[warn] WEBUI_USER not defined (via -e WEBUI_USER), defaulting to 'admin'" | ts '%Y-%m-%d %H:%M:%.S'
+			export WEBUI_USER="admin"
+		fi
+
+		export WEBUI_PASS=$(echo "${WEBUI_PASS}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+		if [[ ! -z "${WEBUI_PASS}" ]]; then
+			if [[ "${WEBUI_PASS}" == "minecraft" ]]; then
+				echo "[warn] WEBUI_PASS defined as '${WEBUI_PASS}' is weak, please consider using a stronger password" | ts '%Y-%m-%d %H:%M:%.S'
+			else
+				echo "[info] WEBUI_PASS defined as '${WEBUI_PASS}'" | ts '%Y-%m-%d %H:%M:%.S'
+			fi
+		else
+			WEBUI_PASS_file="/config/minecraft/security/WEBUI_PASS"
+			if [ ! -f "${WEBUI_PASS_file}" ]; then
+				# generate random password for web ui using SHA to hash the date,
+				# run through base64, and then output the top 16 characters to a file.
+				mkdir -p "/config/minecraft/security"
+				date +%s | sha256sum | base64 | head -c 16 > "${WEBUI_PASS_file}"
+			fi
+			echo "[warn] WEBUI_PASS not defined (via -e WEBUI_PASS), using randomised password (password stored in '${WEBUI_PASS_file}')" | ts '%Y-%m-%d %H:%M:%.S'
+			export WEBUI_PASS="$(cat ${WEBUI_PASS_file})"
+		fi
+	fi
 fi
 
 EOF
