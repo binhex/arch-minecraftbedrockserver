@@ -15,6 +15,7 @@ Alpha release of Minecraft Bedrock Edition for Linux.
 docker run -d \
     --net="bridge" \
     --name=<container name> \
+    -p <host port>:8222/tcp \
     -p <host port>:19132/tcp \
     -p <host port>:19132/udp \
     -p <host port>:19133/tcp \
@@ -44,6 +45,7 @@ Requires `-e ENABLE_WEBUI_CONSOLE=yes`
 docker run -d \
     --net="bridge" \
     --name=minecraftbedrockserver \
+    -p 8222:8222/tcp \
     -p 19132:19132/tcp \
     -p 19132:19132/udp \
     -p 19132:19133/tcp \
