@@ -35,7 +35,7 @@ Please replace all user variables in the above command defined by <> with the co
 
 **Access Minecraft Server console**
 
-Requires env var 'ENABLE_WEBUI_CONSOLE' set to 'yes'
+Requires `-e ENABLE_WEBUI_CONSOLE=yes`
 
 `http://<host ip>:8222`
 
