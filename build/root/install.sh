@@ -162,14 +162,6 @@ fi
 
 if [[ "${ENABLE_WEBUI_CONSOLE}" == "yes" ]]; then
 
-	export WEBUI_CONSOLE_TITLE=$(echo "${WEBUI_CONSOLE_TITLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-	if [[ ! -z "${WEBUI_CONSOLE_TITLE}" ]]; then
-		echo "[info] WEBUI_CONSOLE_TITLE defined as '${WEBUI_CONSOLE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
-	else
-		echo "[info] WEBUI_CONSOLE_TITLE not defined,(via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
-		export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
-	fi
-
 	export ENABLE_WEBUI_AUTH=$(echo "${ENABLE_WEBUI_AUTH}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
 	if [[ ! -z "${ENABLE_WEBUI_AUTH}" ]]; then
 		echo "[info] ENABLE_WEBUI_AUTH defined as '${ENABLE_WEBUI_AUTH}'" | ts '%Y-%m-%d %H:%M:%.S'
@@ -204,6 +196,14 @@ if [[ "${ENABLE_WEBUI_CONSOLE}" == "yes" ]]; then
 			fi
 			echo "[warn] WEBUI_PASS not defined (via -e WEBUI_PASS), using randomised password (password stored in '${WEBUI_PASS_file}')" | ts '%Y-%m-%d %H:%M:%.S'
 			export WEBUI_PASS="$(cat ${WEBUI_PASS_file})"
+		fi
+
+		export WEBUI_CONSOLE_TITLE=$(echo "${WEBUI_CONSOLE_TITLE}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+		if [[ ! -z "${WEBUI_CONSOLE_TITLE}" ]]; then
+			echo "[info] WEBUI_CONSOLE_TITLE defined as '${WEBUI_CONSOLE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
+		else
+			echo "[info] WEBUI_CONSOLE_TITLE not defined,(via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
+			export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
 		fi
 	fi
 fi
