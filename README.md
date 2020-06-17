@@ -27,7 +27,7 @@ docker run -d \
     -e ENABLE_WEBUI_CONSOLE=<yes|no> \
     -e ENABLE_WEBUI_AUTH=<yes|no> \
     -e WEBUI_USER=<specify webui username> \
-    -e WEBUI_PASS=<specify webui password \
+    -e WEBUI_PASS=<specify webui password> \
     -e WEBUI_CONSOLE_TITLE=<specify webui console title> \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
