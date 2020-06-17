@@ -9,7 +9,8 @@ if [[ "${ENABLE_WEBUI_CONSOLE}" == "yes" ]]; then
 	fi
 
 	echo "[info] Starting Minecraft console Web UI..."
-	gotty --port=8222 --title-format "${WEBUI_CONSOLE_TITLE}" "${credentials}" --permit-write screen -r minecraft
+	# note - do NOT quote the credentials, it will not start otherwise
+	gotty --port=8222 --title-format "${WEBUI_CONSOLE_TITLE}" ${credentials} --permit-write screen -r minecraft
 
 else
 
