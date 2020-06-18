@@ -56,9 +56,9 @@ source aur.sh
 
 # download gotty which gives us minecraft console in web ui
 if [[ "${OS_ARCH}" == "x86-64" ]]; then
-	github.sh -df github-download.zip -dp /tmp -ep /tmp/extracted -ip /usr/bin -go yudai -rt binary -gr gotty -da gotty_linux_amd64.tar.gz
+	github.sh --install-path /usr/bin --github-owner yudai --github-repo gotty --download-assets gotty_linux_amd64.tar.gz
 elif [[ "${OS_ARCH}" == "aarch64" ]]; then
-	github.sh -df github-download.zip -dp /tmp -ep /tmp/extracted -ip /usr/bin -go yudai -rt binary -gr gotty -da gotty_linux_arm.tar.gz
+	github.sh --install-path /usr/bin --github-owner yudai --github-repo gotty --download-assets gotty_linux_arm.tar.gz
 fi
 
 # custom
