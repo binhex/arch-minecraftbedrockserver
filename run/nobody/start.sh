@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# if minecraft folder doesnt exist then copy default to host config volume
-if [ ! -d "/config/minecraft" ]; then
+# if minecraft server.properties file doesnt exist then copy default to host config volume
+if [ ! -f "/config/minecraft/server.properties" ]; then
 
-	echo "[info] Minecraft folder doesnt exist, copying default to '/config/minecraft/'..."
+	echo "[info] Minecraft server.properties file doesnt exist, copying default installation to '/config/minecraft/'..."
 
 	mkdir -p /config/minecraft
 	if [[ -d "/srv/minecraft" ]]; then
@@ -20,11 +20,6 @@ else
 	echo "[info] Minecraft folder '/config/minecraft' already exists, rsyncing newer files..."
 	rsync -rltp --exclude 'worlds' --exclude '/server.properties' --exclude '/*.json' --exclude '*.debug' '/srv/minecraft/' '/config/minecraft'
 
-fi
-
-# if server.properties doesnt exist then copy across default
-if [[ ! -f /config/minecraft/server.properties ]]; then
-	cp '/srv/minecraft/server.properties' '/config/minecraft/server.properties'
 fi
 
 echo "[info] Starting Minecraft Bedrock process in screen session 'minecraft'..."
