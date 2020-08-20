@@ -1,5 +1,18 @@
 #!/bin/bash
 
+function start_minecraft() {
+
+	# create logs sub folder to store screen output from console
+	mkdir -p /config/minecraft/logs
+
+	# run screen attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
+	echo "[info] Starting Minecraft Bedrock process..."
+	screen -L -Logfile '/config/minecraft/logs/screen.log' -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server"
+	echo "[info] Minecraft Bedrock process is running"
+	cat
+
+}
+
 # if minecraft server.properties file doesnt exist then copy default to host config volume
 if [ ! -f "/config/minecraft/server.properties" ]; then
 
@@ -28,10 +41,6 @@ echo "[info] docker exec -u nobody -it <container name> screen -r minecraft"
 echo "[info] To detach from the screen session press:-"
 echo "[info] CTRL+a and then release keys and press d"
 
-# create logs sub folder to store screen output from console
-mkdir -p /config/minecraft/logs
+# start minecraft
+start_minecraft
 
-# run screen attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
-screen -L -Logfile '/config/minecraft/logs/screen.log' -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server"
-echo "[info] Minecraft Bedrock process is running"
-cat
