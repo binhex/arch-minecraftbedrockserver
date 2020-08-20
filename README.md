@@ -8,7 +8,7 @@ Minecraft is a sandbox video game created by Swedish game developer Markus Perss
 
 **Build notes**
 
-Alpha release of Minecraft Bedrock Edition for Linux.
+Latest alpha Minecraft Bedrock release from Mojang.
 
 **Usage**
 ```
