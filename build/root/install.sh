@@ -68,10 +68,10 @@ fi
 # use awk to match start and end of tags
 # grep to perl regex match download url
 # grep to stop at end double quotes
-minecraft_bedrock_url=$(curly.sh -url https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
+minecraft_bedrock_url=$(rcurl.sh https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
 
 # download compiled minecraft bedrock server
-curly.sh -of "/tmp/minecraftbedrockserver.zip" -url "${minecraft_bedrock_url}"
+rcurl.sh -o "/tmp/minecraftbedrockserver.zip" "${minecraft_bedrock_url}"
 
 # unzip minecraft bedrock server
 mkdir -p "/srv/minecraft" && unzip "/tmp/minecraftbedrockserver.zip" -d "/srv/minecraft"
