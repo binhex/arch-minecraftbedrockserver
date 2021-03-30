@@ -61,7 +61,7 @@ docker run -d \
     -e ENABLE_WEBUI_AUTH=yes \
     -e WEBUI_USER=admin \
     -e WEBUI_PASS=minecraft \
-    -e WEBUI_CONSOLE_TITLE=Minecraft Server \
+    -e WEBUI_CONSOLE_TITLE='Minecraft Bedrock' \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
