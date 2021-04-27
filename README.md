@@ -29,6 +29,7 @@ docker run -d \
     -e WEBUI_USER=<specify webui username> \
     -e WEBUI_PASS=<specify webui password> \
     -e WEBUI_CONSOLE_TITLE=<specify webui console title> \
+    -e STARTUP_CMD=<minecraft console command to execute on startup> \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
@@ -62,6 +63,7 @@ docker run -d \
     -e WEBUI_USER=admin \
     -e WEBUI_PASS=minecraft \
     -e WEBUI_CONSOLE_TITLE='Minecraft Bedrock' \
+    -e STARTUP_CMD=gamerule showcoordinates true \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \

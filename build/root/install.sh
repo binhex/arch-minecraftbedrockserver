@@ -202,8 +202,15 @@ if [[ "${ENABLE_WEBUI_CONSOLE}" == "yes" ]]; then
 	if [[ ! -z "${WEBUI_CONSOLE_TITLE}" ]]; then
 		echo "[info] WEBUI_CONSOLE_TITLE defined as '${WEBUI_CONSOLE_TITLE}'" | ts '%Y-%m-%d %H:%M:%.S'
 	else
-		echo "[info] WEBUI_CONSOLE_TITLE not defined,(via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
+		echo "[info] WEBUI_CONSOLE_TITLE not defined (via -e WEBUI_CONSOLE_TITLE), defaulting to 'Minecraft Bedrock'" | ts '%Y-%m-%d %H:%M:%.S'
 		export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
+	fi
+
+	export STARTUP_CMD=$(echo "${STARTUP_CMD}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+	if [[ ! -z "${STARTUP_CMD}" ]]; then
+		echo "[info] STARTUP_CMD defined as '${STARTUP_CMD}'" | ts '%Y-%m-%d %H:%M:%.S'
+	else
+		echo "[info] STARTUP_CMD not defined (via -e STARTUP_CMD)" | ts '%Y-%m-%d %H:%M:%.S'
 	fi
 
 fi
