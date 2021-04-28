@@ -206,13 +206,13 @@ if [[ "${ENABLE_WEBUI_CONSOLE}" == "yes" ]]; then
 		export WEBUI_CONSOLE_TITLE="Minecraft Bedrock"
 	fi
 
-	export STARTUP_CMD=$(echo "${STARTUP_CMD}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
-	if [[ ! -z "${STARTUP_CMD}" ]]; then
-		echo "[info] STARTUP_CMD defined as '${STARTUP_CMD}'" | ts '%Y-%m-%d %H:%M:%.S'
-	else
-		echo "[info] STARTUP_CMD not defined (via -e STARTUP_CMD)" | ts '%Y-%m-%d %H:%M:%.S'
-	fi
+fi
 
+export STARTUP_CMD=$(echo "${STARTUP_CMD}" | sed -e 's~^[ \t]*~~;s~[ \t]*$~~')
+if [[ ! -z "${STARTUP_CMD}" ]]; then
+	echo "[info] STARTUP_CMD defined as '${STARTUP_CMD}'" | ts '%Y-%m-%d %H:%M:%.S'
+else
+	echo "[info] STARTUP_CMD not defined (via -e STARTUP_CMD)" | ts '%Y-%m-%d %H:%M:%.S'
 fi
 
 EOF
