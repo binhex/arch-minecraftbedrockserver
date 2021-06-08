@@ -70,6 +70,8 @@ fi
 # grep to stop at end double quotes
 minecraft_bedrock_url=$(rcurl.sh https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
 
+echo "[INFO] Web scrape URL for Bedrock is '${minecraft_bedrock_url}'"
+
 # download compiled minecraft bedrock server
 rcurl.sh -o "/tmp/minecraftbedrockserver.zip" "${minecraft_bedrock_url}"
 
