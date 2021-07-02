@@ -65,12 +65,10 @@ fi
 ####
 
 # determine download url for minecraft bedrock server from minecraft.net
-# set header to mimic browser, as ms blocks otherwise
 # use awk to match start and end of tags
 # grep to perl regex match download url
 # grep to stop at end double quotes
-header="user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.114 Safari/537.36"
-minecraft_bedrock_url=$(rcurl.sh --header "${header}" https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
+minecraft_bedrock_url=$(rcurl.sh https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
 
 echo "[INFO] Web scrape URL for Bedrock is '${minecraft_bedrock_url}'"
 
