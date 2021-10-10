@@ -24,9 +24,6 @@ RUN chmod +x /root/*.sh && \
 # docker settings
 #################
 
-# map /config to host defined config path (used to store configuration from app)
-VOLUME /config
-
 # expose ipv4 port for minecraft
 EXPOSE 19132/tcp
 EXPOSE 19132/udp
