@@ -6,6 +6,11 @@ set -e
 # release tag name from build arg, stripped of build ver using string manipulation
 release_tag_name="${1//-[0-9][0-9]/}"
 
+if [[ -z "${release_tag_name}" ]]; then
+	echo "[warn] Release tag name from build arg is empty, exiting script..."
+	exit 1
+fi
+
 # build scripts
 ####
 
@@ -67,11 +72,7 @@ fi
 # custom
 ####
 
-# determine download url for minecraft bedrock server from minecraft.net
-# use awk to match start and end of tags
-# grep to perl regex match download url
-# grep to stop at end double quotes
-minecraft_bedrock_url=$(rcurl.sh https://www.minecraft.net/en-us/download/server/bedrock | awk '/check-to-proceed/,/<\/div>/' | grep -Po -m 1 'https://minecraft.azureedge.net/bin-linux[^"]+' | grep -Po '[^"]+$')
+minecraft_bedrock_url="https://minecraft.azureedge.net/bin-linux/bedrock-server-${release_tag_name}"
 
 echo "[INFO] Web scrape URL for Bedrock is '${minecraft_bedrock_url}'"
 
