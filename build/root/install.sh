@@ -72,7 +72,7 @@ fi
 # custom
 ####
 
-minecraft_bedrock_url="https://minecraft.azureedge.net/bin-linux/bedrock-server-${release_tag_name}"
+minecraft_bedrock_url="https://minecraft.azureedge.net/bin-linux/bedrock-server-${release_tag_name}.zip"
 
 echo "[INFO] Web scrape URL for Bedrock is '${minecraft_bedrock_url}'"
 
