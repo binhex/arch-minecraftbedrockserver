@@ -67,7 +67,7 @@ if [[ "${CREATE_BACKUP_HOURS}" -gt 0 ]]; then
 		fi
 
 		echo "[info] Setting Minecraft back to 'save resume..."
-		run_console_command 'Changes to the level are resumed' 'save resume'
+		run_console_command 'Changes to the world are resumed' 'save resume'
 
 		echo "[info] Minecraft worlds backup complete"
 
