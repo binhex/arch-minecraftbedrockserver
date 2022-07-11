@@ -1,4 +1,4 @@
-FROM binhex/arch-base:latest
+FROM binhex/arch-base:test
 LABEL org.opencontainers.image.authors = "binhex"
 LABEL org.opencontainers.image.source = "https://github.com/binhex/arch-minecraftbedrockserver"
 
