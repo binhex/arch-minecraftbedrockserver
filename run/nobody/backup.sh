@@ -60,9 +60,11 @@ if [[ "${CREATE_BACKUP_HOURS}" -gt 0 ]]; then
 
 			# create backup sub folder to store backups of worlds
 			mkdir -p "/config/minecraft/backups/${datetime}"
-
 			echo "[info] Minecraft worlds are now ready for backup, backing up to '/config/minecraft/backups/${datetime}/'..."
-			cp -R "/config/minecraft/worlds" "/config/minecraft/backups/${datetime}"
+			cp -r "/config/minecraft/worlds" "/config/minecraft/backups/${datetime}"
+			cp "/config/server.properties" "/config/minecraft/backups/${datetime}"
+			touch "/config/minecraft/backups/${datetime}/LAST_BACKEDUP_${datetime}.txt"
+			zip -rm9 "/config/backups/${datetime}/backup-${datetime}.zip" "/config/minecraft/backups/${datetime}"
 
 		fi
 

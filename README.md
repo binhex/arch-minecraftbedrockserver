@@ -69,10 +69,13 @@ docker run -d \
     -e PGID=0 \
     binhex/arch-minecraftbedrockserver
 ```
-
-**Notes**
+**Backups**
 
 If you do **NOT** want world backups and/or purging of backups then set the value to '0' for env vars 'CREATE_BACKUP_HOURS' and/or 'PURGE_BACKUP_DAYS'.
+
+Backups are zipped into the /config/backups folder.
+
+**Notes**
 
 User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as:-
 
