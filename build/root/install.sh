@@ -4,9 +4,9 @@
 set -e
 
 # release tag name from build arg, stripped of build ver using string manipulation
-release_tag_name="${1//-[0-9][0-9]/}"
+RELEASETAG="${1//-[0-9][0-9]/}"
 
-if [[ -z "${release_tag_name}" ]]; then
+if [[ -z "${RELEASETAG}" ]]; then
 	echo "[warn] Release tag name from build arg is empty, exiting script..."
 	exit 1
 fi
@@ -72,7 +72,7 @@ fi
 # custom
 ####
 
-minecraft_bedrock_url="https://minecraft.azureedge.net/bin-linux/bedrock-server-${release_tag_name}.zip"
+minecraft_bedrock_url="https://minecraft.azureedge.net/bin-linux/bedrock-server-${RELEASETAG}.zip"
 
 echo "[INFO] Web scrape URL for Bedrock is '${minecraft_bedrock_url}'"
 
