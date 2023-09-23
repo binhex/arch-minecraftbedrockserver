@@ -19,19 +19,6 @@ if [[ -z "${TARGETARCH}" ]]; then
 	exit 1
 fi
 
-# get target arch from Dockerfile argument
-TARGETARCH="${2}"
-
-if [[ -z "${RELEASETAG}" ]]; then
-	echo "[warn] Release tag name from build arg is empty, exiting script..."
-	exit 1
-fi
-
-if [[ -z "${TARGETARCH}" ]]; then
-	echo "[warn] Target architecture name from build arg is empty, exiting script..."
-	exit 1
-fi
-
 # build scripts
 ####
 
