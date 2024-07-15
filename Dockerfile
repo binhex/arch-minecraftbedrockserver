@@ -30,17 +30,6 @@ RUN chmod +x /root/*.sh && \
 # docker settings
 #################
 
-# expose ipv4 port for minecraft
-EXPOSE 19132/tcp
-EXPOSE 19132/udp
-
-# expose ipv6 port for minecraft
-EXPOSE 19133/tcp
-EXPOSE 19133/udp
-
-# expose ipv4 port for minecraft web ui console
-EXPOSE 8222/tcp
-
 # set permissions
 #################
 
