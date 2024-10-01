@@ -66,7 +66,7 @@ github.sh --install-path /usr/bin --github-owner sorenisanerd --github-repo gott
 # use env var RELEASETAG to get release version (determined by tdb) stripped of build ver using string manipulation
 release_version="${RELEASETAG//-[0-9][0-9]/}"
 
-minecraft_bedrock_url="https://minecraft.azureedge.net/bin-linux/bedrock-server-${release_version}.zip"
+minecraft_bedrock_url="https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-${release_version}.zip"
 
 echo "[INFO] Web scrape URL for Bedrock is '${minecraft_bedrock_url}'"
 
