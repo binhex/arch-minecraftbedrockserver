@@ -76,6 +76,12 @@ rcurl.sh -o "/tmp/minecraftbedrockserver.zip" "${minecraft_bedrock_url}"
 # unzip minecraft bedrock server
 mkdir -p "/srv/minecraft" && unzip "/tmp/minecraftbedrockserver.zip" -d "/srv/minecraft"
 
+# enable mouse and keyboard scrolling for screen
+cat <<EOF > /home/nobody/.screenrc
+# Enable mouse scrolling and scroll bar history scrolling
+termcapinfo xterm* ti@:te@
+EOF
+
 # container perms
 ####
 
