@@ -82,6 +82,11 @@ cat <<EOF > /home/nobody/.screenrc
 termcapinfo xterm* ti@:te@
 EOF
 
+# download screen v4 from arch linux archive due to buffer overflow bug reported
+# here:- https://gitlab.archlinux.org/archlinux/packaging/packages/screen/-/issues/2
+curl -o /tmp/screen.tar.zst -L https://archive.archlinux.org/packages/s/screen/screen-4.9.1-2-x86_64.pkg.tar.zst
+pacman -U /tmp/screen.tar.zst --noconfirm
+
 # container perms
 ####
 
