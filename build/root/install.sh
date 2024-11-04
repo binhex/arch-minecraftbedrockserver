@@ -38,7 +38,7 @@ mv /tmp/scripts-master/shell/arch/docker/*.sh /usr/local/bin/
 ####
 
 # define pacman packages
-pacman_packages="rsync screen"
+pacman_packages="rsync"
 
 # install compiled packages using pacman
 if [[ ! -z "${pacman_packages}" ]]; then
@@ -81,6 +81,11 @@ cat <<EOF > /home/nobody/.screenrc
 # Enable mouse scrolling and scroll bar history scrolling
 termcapinfo xterm* ti@:te@
 EOF
+
+# download screen v4 from arch linux archive due to buffer overflow bug reported
+# here:- https://gitlab.archlinux.org/archlinux/packaging/packages/screen/-/issues/2
+curl -o /tmp/screen.tar.zst -L https://archive.archlinux.org/packages/s/screen/screen-4.9.1-2-x86_64.pkg.tar.zst
+pacman -U /tmp/screen.tar.zst --noconfirm
 
 # container perms
 ####
