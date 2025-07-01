@@ -21,7 +21,6 @@ Latest alpha Minecraft Bedrock release from Mojang.
 
 ```bash
 docker run -d \
-
     --net="bridge" \
     --name=<container name> \
     -p <host port>:8222/tcp \
@@ -42,9 +41,7 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-
     binhex/arch-minecraftbedrockserver
-
 ```
 
 &nbsp;
@@ -61,7 +58,6 @@ Requires `-e ENABLE_WEBUI_CONSOLE=yes`
 
 ```bash
 docker run -d \
-
     --net="bridge" \
     --name=minecraftbedrockserver \
     -p 8222:8222/tcp \
@@ -82,9 +78,7 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
-
     binhex/arch-minecraftbedrockserver
-
 ```
 
 ## Notes
@@ -97,7 +91,6 @@ for the user you want to run the container as:-
 
 ```bash
 id <username>
-
 ```
 
 ___
