@@ -1,18 +1,27 @@
-**Application**
+# Application
 
 [Minecraft Bedrock Edition](https://www.minecraft.net/en-us/download/server/bedrock)
 
-**Description**
+## Description
 
-Minecraft is a sandbox video game created by Swedish game developer Markus Persson and released by Mojang in 2011. The game allows players to build with a variety of different blocks in a 3D procedurally generated world, requiring creativity from players. Other activities in the game include exploration, resource gathering, crafting, and combat. Multiple game modes that change gameplay are available, including—but not limited to—a survival mode, in which players must acquire resources to build the world and maintain health, and a creative mode, where players have unlimited resources to build with.
+Minecraft is a sandbox video game created by Swedish game developer Markus
+Persson and released by Mojang in 2011. The game allows players to build with a
+variety of different blocks in a 3D procedurally generated world, requiring
+creativity from players. Other activities in the game include exploration,
+resource gathering, crafting, and combat. Multiple game modes that change
+gameplay are available, including—but not limited to—a survival mode, in which
+players must acquire resources to build the world and maintain health, and a
+creative mode, where players have unlimited resources to build with.
 
-**Build notes**
+## Build notes
 
 Latest alpha Minecraft Bedrock release from Mojang.
 
-**Usage**
-```
+## Usage
+
+```bash
 docker run -d \
+
     --net="bridge" \
     --name=<container name> \
     -p <host port>:8222/tcp \
@@ -33,20 +42,26 @@ docker run -d \
     -e UMASK=<umask for created files> \
     -e PUID=<uid for user> \
     -e PGID=<gid for user> \
-    binhex/arch-minecraftbedrockserver
-```
-&nbsp;
-Please replace all user variables in the above command defined by <> with the correct values.
 
-**Access Minecraft Server console**
+    binhex/arch-minecraftbedrockserver
+
+```
+
+&nbsp;
+Please replace all user variables in the above command defined by <> with the
+correct values.
+
+## Access Minecraft Server console
 
 Requires `-e ENABLE_WEBUI_CONSOLE=yes`
 
 `http://<host ip>:8222`
 
-**Example**
-```
+## Example
+
+```bash
 docker run -d \
+
     --net="bridge" \
     --name=minecraftbedrockserver \
     -p 8222:8222/tcp \
@@ -67,18 +82,24 @@ docker run -d \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
+
     binhex/arch-minecraftbedrockserver
-```
-
-**Notes**
-
-If you do **NOT** want world backups and/or purging of backups then set the value to '0' for env vars 'CREATE_BACKUP_HOURS' and/or 'PURGE_BACKUP_DAYS'.
-
-User ID (PUID) and Group ID (PGID) can be found by issuing the following command for the user you want to run the container as:-
 
 ```
+
+## Notes
+
+If you do **NOT** want world backups and/or purging of backups then set the
+value to '0' for env vars 'CREATE_BACKUP_HOURS' and/or 'PURGE_BACKUP_DAYS'.
+
+User ID (PUID) and Group ID (PGID) can be found by issuing the following command
+for the user you want to run the container as:-
+
+```bash
 id <username>
+
 ```
+
 ___
 If you appreciate my work, then please consider buying me a beer  :D
 
