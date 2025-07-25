@@ -36,7 +36,7 @@ function start_minecraft() {
 
 	# run screen attached to minecraft (daemonized, non-blocking) to allow users to run commands in minecraft console
 	echo "[info] Starting Minecraft Bedrock process..."
-	screen -L -Logfile '/config/minecraft/logs/screen.log' -d -S minecraft -m bash -c "cd /config/minecraft && trap 'exit 0' SIGINT SIGTERM; while true; do ./bedrock_server; done"
+	screen -L -Logfile '/config/minecraft/logs/screen.log' -d -S minecraft -m bash -c "cd /config/minecraft && ./bedrock_server"
 	echo "[info] Minecraft Bedrock process is running"
 	if [[ ! -z "${STARTUP_CMD}" ]]; then
 		startup_cmd
