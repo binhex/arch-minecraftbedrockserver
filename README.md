@@ -77,7 +77,7 @@ docker run -d \
     -e WEBUI_USER=admin \
     -e WEBUI_PASS=minecraft \
     -e WEBUI_CONSOLE_TITLE='Minecraft Bedrock' \
-    -e STARTUP_CMD=gamerule showcoordinates true \
+    -e STARTUP_CMD='gamerule showcoordinates true' \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
