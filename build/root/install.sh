@@ -31,7 +31,7 @@ if [[ -z "${TARGETARCH}" ]]; then
 fi
 
 # write APPNAME and RELEASETAG to file to record the app name and release tag used to build the image
-echo -e "export APPNAME=${APPNAME}\nexport IMAGE_RELEASE_TAG=${RELEASETAG}\nexport TARGETARCH=${TARGETARCH}\n" >> '/etc/image-build-info'
+echo -e "export APPNAME=${APPNAME}\nexport IMAGE_RELEASE_TAG=${RELEASETAG}\n" >> '/etc/image-build-info'
 
 # ensure we have the latest builds scripts
 refresh.sh
@@ -54,8 +54,16 @@ fi
 # github packages
 ####
 
-# download gotty which gives us minecraft console in web ui
-github.sh --install-path /usr/bin --github-owner sorenisanerd --github-repo gotty --download-assets "gotty.*linux_${TARGETARCH}.tar.gz" --query-type 'release'
+download_path="/tmp/gotty"
+install_path="/usr/bin"
+
+mkdir -p "${download_path}" "${install_path}"
+
+# binary asset download
+gh.sh --github-owner sorenisanerd --github-repo gotty --release-type asset --download-path "${download_path}" --asset-glob "gotty*linux_${TARGETARCH}.tar.gz"
+
+# unpack to install path
+tar -xvf "${download_path}/"*.tar.gz -C "${install_path}"
 
 # custom
 ####
