@@ -60,7 +60,7 @@ install_path="/usr/bin"
 mkdir -p "${download_path}" "${install_path}"
 
 # binary asset download
-gh.sh --github-owner sorenisanerd --github-repo gotty --release-type asset --download-path "${download_path}" --asset-glob "gotty*linux_${TARGETARCH}.tar.gz"
+gh.sh --github-owner sorenisanerd --github-repo gotty --download-type release --release-type binary --download-path "${download_path}" --asset-glob "gotty*linux_${TARGETARCH}.tar.gz"
 
 # unpack to install path
 tar -xvf "${download_path}/"*.tar.gz -C "${install_path}"
@@ -68,7 +68,7 @@ tar -xvf "${download_path}/"*.tar.gz -C "${install_path}"
 # custom
 ####
 
-# use env var RELEASETAG to get release version (determined by tdb) stripped of build ver using string manipulation
+# use env var RELEASETAG to get release version of minecraft bedrock (determined by tdb) stripped of build ver using string manipulation
 release_version="${RELEASETAG//-[0-9][0-9]/}"
 
 minecraft_bedrock_url="https://www.minecraft.net/bedrockdedicatedserver/bin-linux/bedrock-server-${release_version}.zip"
