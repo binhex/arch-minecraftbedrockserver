@@ -60,7 +60,7 @@ install_path="/usr/bin"
 mkdir -p "${download_path}" "${install_path}"
 
 # binary asset download
-gh.sh --github-owner sorenisanerd --github-repo gotty --download-type release --release-type binary --download-path "${download_path}" --asset-glob "gotty*linux_${TARGETARCH}.tar.gz"
+gh.sh --github-owner sorenisanerd --github-repo gotty --download-type release --release-type binary --download-path "${download_path}" --asset-regex "gotty.*linux_${TARGETARCH}.tar.gz"
 
 # unpack to install path
 tar -xvf "${download_path}/"*.tar.gz -C "${install_path}"
