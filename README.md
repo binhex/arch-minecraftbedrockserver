@@ -38,6 +38,8 @@ docker run -d \
     -e WEBUI_PASS=<specify webui password> \
     -e WEBUI_CONSOLE_TITLE=<specify webui console title> \
     -e STARTUP_CMD=<minecraft console command to execute on startup> \
+    -e ENABLE_STARTUP_SCRIPTS=<yes|no> \
+    -e STARTUP_SCRIPTS_MODE=<wait|parallel> \
     -e HEALTHCHECK_COMMAND=<command> \
     -e HEALTHCHECK_ACTION=<action> \
     -e HEALTHCHECK_HOSTNAME=<hostname> \
@@ -78,6 +80,8 @@ docker run -d \
     -e WEBUI_PASS=minecraft \
     -e WEBUI_CONSOLE_TITLE='Minecraft Bedrock' \
     -e STARTUP_CMD='gamerule showcoordinates true' \
+    -e ENABLE_STARTUP_SCRIPTS=no \
+    -e STARTUP_SCRIPTS_MODE=wait \
     -e UMASK=000 \
     -e PUID=0 \
     -e PGID=0 \
@@ -85,6 +89,15 @@ docker run -d \
 ```
 
 ## Notes
+
+`ENABLE_STARTUP_SCRIPTS` when set to `yes` (default `no`) will allow a user to
+install additional packages from the official Arch Repository or the Arch User
+Repository (AUR) via scripts located in the folder
+`/config/minecraftbedrockserver/scripts/`.
+
+`STARTUP_SCRIPTS_MODE` controls how those scripts are executed, set to `wait`
+(default) to run each script in turn and wait for it to complete before the next
+script runs, or `parallel` to run all scripts at the same time.
 
 If you do **NOT** want world backups and/or purging of backups then set the
 value to '0' for env vars 'CREATE_BACKUP_HOURS' and/or 'PURGE_BACKUP_DAYS'.
